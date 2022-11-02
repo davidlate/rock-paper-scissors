@@ -10,120 +10,79 @@ getComputerChoice = () => {
     switch (choice) {
 
         case 1:
-            result = "Rock";
+            result = "rock";
             break;
 
         case 2:
-            result = "Paper";
+            result = "paper";
             break;
 
         case 3:
-            result = "Scissors";
+            result = "scissors";
     }
     return result;
 }
 
-findWinner = (playerSelection, computerSelection) => {
-    playerSelection = playerSelection.toLowerCase();
-    computerSelection = computerSelection.toLowerCase();
 
 
-    if(playerSelection == computerSelection){
-        return result = "tie";
+function playRound(playerSelection) {
+    let computerSelection = getComputerChoice();
+    let result;
+
+    if(playerSelection === computerSelection){
+        result = "tie"; //player increment; computer increment
+        const output = [playerSelection, computerSelection, result]
+        return output;
     }
 
     switch(playerSelection){
         case "rock":
-            computerSelection == "scissors" ? result = "player": result = "computer";
+            if (computerSelection == "scissors") result = "player"
+            else result = "computer";
             break;
         
         case "scissors":
-            computerSelection == "paper" ? result = "player": result = "computer";
+            if(computerSelection == "paper") result = "player"
+            else result = "computer";
             break;
         
         case "paper":
-            computerSelection == "rock" ? result = "player": result = "computer";
-
+            if (computerSelection == "rock")result = "player"
+            else result = "computer";
+            break;
         
-    }
-
-    return result;
-
-}
-
-playRound = (playerSelection, computerSelection) =>{
-
-    let winner = findWinner(playerSelection, computerSelection)
-    let message
-
-    switch(winner){
-
-        case "tie":
-            message = "Tie! Play again to find a winner.";
-            break;
-
-        case "computer":
-            message = "You lose!  Try your luck again.";
-            break;
-
-        case "player":
-            message = "You win! Congratulations.";
-            break;
-    }
-
-    console.log(message);
-    return winner
-}
-
-getPlayerInput = () => {
-    playerInput = prompt("Rock, paper, or scissors?");
-    playerInput = playerInput.toLowerCase();
-
-    if(playerInput == "rock"||playerInput== "paper" || playerInput == "scissors"){
-        return playerInput;
-    }
-
-    else{
-        console.log("Only select rock, paper, or scissors");
-        getPlayerInput();
-        return playerInput;
-    }
+        default:
+            result = "error";
     
+        }
+        const output = [playerSelection, computerSelection, result]
+    return output;
+
 }
 
 
-game = () => {
-    let winner;
-    let playerScore = 0;
-    let computerScore = 0;
-    let victor;
-    for(let i=0; i<5; i++){
-        winner = playRound(getPlayerInput(), getComputerChoice());
 
-        switch(winner){
-            case "player":
-                playerScore++;
-                break;
-            case "computer":
-                computerScore++;
-                break;
-        }}
 
-    if(playerScore > computerScore){
-        victor = "player";
-        console.log(`You won with a score of ${playerScore}!.  Computer loses with a score of ${computerScore}.`);
-        return;
-    }
-    else if(computerScore > playerScore){
-        victor = "computer";
-        console.log(`Computer wins with a score of ${computerScore}!. You lost with a score of ${playerScore}.`);
-        return;
-    }     
-    else{
-        victor = "tie"
-        console.log(`Tie!`);
-    }
-            
+
+function getSelectionFromKey(e) {
+    let div = document.querySelector(`.game-button[data-key="${e.key}"]`);
+    if (!div) return;
+    let selection = div.id;
+    output = playRound(selection);
+    console.log(output);
 }
 
-game();
+function getSelectionFromClick(e){
+    let selection;
+    if (e.target.classList.contains('keypress')) selection = e.target.parentNode.id;
+    else selection = e.target.id;
+    output = playRound(selection);
+    console.log(output)
+}
+
+const buttons = document.querySelectorAll('.game-button');
+
+
+window.addEventListener('keydown', getSelectionFromKey);
+buttons.forEach(btn => btn.addEventListener('click', getSelectionFromClick));
+

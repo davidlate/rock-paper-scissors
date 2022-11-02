@@ -4,10 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock Paper Scissors Game</title>
+    <script src="javascript.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-    <script src="javascript.js"></script>
+<section>
 
+    <div class="game-info">
+        <h5>Rock Paper Scissors!</h5>
+    </div>
+
+
+    <div class='game-buttons'>
+        <button data-key="a" class="game-button" id="rock">Rock<div class="keypress">A</div></button>
+        <button data-key="s" class="game-button" id="paper">Paper<div class="keypress">S</div></button>
+        <button data-key="d" class="game-button" id="scissors">Scissors<div id="paper" class="keypress">D</div></button>
+    </div>
+
+    <div class = "mechanics">
+        <button data-key="Enter" class="game-button" id="reset">Reset Game <div class="keypress">Enter</div></button>
+        <button data-key=" " class="game-button" id="next">Next Round <div class="keypress">Spacebar</div></button>
+    </div>
+
+    <div class="footer">Copyright © 2022 David Earley</div>
+</section>
 </body>
 </html>
