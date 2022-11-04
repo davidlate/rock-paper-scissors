@@ -19,8 +19,6 @@ getComputerChoice = () => {
     return result;
 }
 
-
-
 function playRound(playerSelection) {
     let computerSelection = getComputerChoice();
     let result;
@@ -64,8 +62,6 @@ function playRound(playerSelection) {
 
 }
 
-
-
 function game(selection) {
 
     const output = playRound(selection);
@@ -108,20 +104,132 @@ function game(selection) {
 
 function getSelectionFromInput(e) {
     let selection;
-    if(e.target !== ''){ //if input is a click
-        if (e.target.classList.contains('keypress')) selection = e.target.parentNode.id;
-        else selection = e.target.id;
-    }
 
     if (e.type=='keydown'){ //if input is a keydown
+
         let div = document.querySelector(`.game-button[data-key="${e.key}"]`);
         if (!div) return; 
         selection = div.id;
     }
-    
-    console.log(selection);
+
+    else if(e.type == 'click'){ //if input is a click
+        if (e.target.classList.contains('keypress')) selection = e.target.parentNode.id;
+        else selection = e.target.id;
+    }
+
+    updateGame(selection);
     return selection;
 }
+
+
+function changeSelectedStyle(targetElementIds, direction, style='selected'){
+    
+    for (elementId of targetElementIds)
+    element = document.querySelector(`#${ElementId}`);
+
+    if (direction=='add') element.classList.add('selected');
+    if (direction=='remove') element.classList.remove('selected')
+}
+
+function resetGame(){
+    playerScore = 0;
+    computerScore = 0;
+    gameNumber = 0;
+    btns = document.querySelectorAll('.game-button');
+    btns.forEach(btn => btn.classList.remove('selected'));
+    gameState = "play";
+    setDefaultMessages();
+
+ }
+
+
+ function setDefaultMessages() {
+    const msgBox = document.querySelector('#message');
+    const scoreBox = document.querySelector('#scores')
+    scoreBox.textContent = `Game Number: ${gameNumber}. Your Score: ${playerScore}. Computer Score: ${computerScore}.`;
+    if (gameNumber==0) msgBox.textContent = 'Play against the computer.  First to 5 wins!';
+    if (gameNumber>0) msgBox.textContent = 'Choose a new selection';
+
+}
+
+
+function roundResultMessage(roundResult, scores){
+    //roundResult = [player selection, computer selection, round winner]
+    //scores = [playerScore, computerScore, gameNo]
+    const msgBox = document.querySelector('#message');
+    const scoreBox = document.querySelector('#scores')
+
+    switch (roundResult[2]){
+        
+        case "tie":
+            msgBox.textContent = `The computer also chose ${roundResult[1]}.  Tie!`;
+            break;
+        case "player":
+            msgBox.textContent = `The computer chose ${roundResult[1]}.  You win this round!`;
+            break;
+        case "computer":
+            msgBox.textContent = `The computer chose ${roundResult[1]}.  You lost this round!`;
+            break;
+
+        }
+    scoreBox.textContent = `Game Number: ${scores[2]}. Your Score: ${scores[0]}. Computer Score: ${scores[1]}.`;
+
+}
+
+function updateScore(roundResult) {
+    
+    switch (roundResult[2]){
+        case "tie":
+            gameNumber +=1;
+            return;
+        case "player":
+            playerScore +=1;
+            gameNumber +=1;
+            return
+        case "computer":
+            computerScore +=1;
+            gameNumber +=1;
+            return
+        }
+    }
+
+
+
+
+function updateGame(selection){
+    
+    if (selection == "reset") resetGame();
+    
+
+
+    else if(gameState=="pause"){
+        if (selection !== "next") return;
+        else if (selection == "next"){
+            document.querySelectorAll('button').forEach(btn=> btn.classList.remove('selected'))
+            setDefaultMessages();
+            gameState = 'play';
+            return;
+            }
+        }
+
+
+    else {
+
+    changeSelectedStyle(selection, "add"); 
+    roundResult = playRound(selection);
+    updateScore(roundResult);
+    let scores = [playerScore, computerScore, gameNumber]
+
+    if (playerScore==MAX_SCORE) gameState = 'playerWin';
+    if (computerScore==MAX_SCORE) gameState = 'computerWin';scores;
+    roundResultMessage(roundResult, scores);
+
+    gameState = "pause";
+
+    }
+
+}
+
 
 
 
@@ -130,6 +238,8 @@ function getSelectionFromInput(e) {
 let playerScore = 0;
 let computerScore = 0;
 let gameNumber = 0;
+let gameState = 'play';
+let MAX_SCORE = 5;
 
 
 
@@ -147,11 +257,6 @@ const lowerResults = document.querySelector('#message');
 const lowerResults2 = document.querySelector('#scores');
 
 const RPS = document.querySelector('.RPS');
-
-const option = ['Rock', 'Paper', 'Scissors'];
-
-
-let i=0;
 
 
 

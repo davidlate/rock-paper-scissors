@@ -2,7 +2,6 @@
     background-color: rgb(2, 23, 41);
     font-family: sans-serif;
     border-width: 1px;
-    border-style: solid;
     color: grey;
     box-sizing: border-box;
 }
@@ -51,7 +50,7 @@ button{
     background-color: rgb(2, 19, 97);
 }
 
-button:hover{
+.hover:hover{
     border-color: yellow;
     scale:1.05;
 }
