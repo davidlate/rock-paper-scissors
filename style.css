@@ -2,7 +2,7 @@
     background-color: rgb(2, 23, 41);
     font-family: sans-serif;
     border-width: 1px;
-    /*border-style: solid;*/
+    border-style: solid;
     color: grey;
     box-sizing: border-box;
 }
@@ -25,7 +25,26 @@ h5{
     font-size: 48px;
     color: white;
     justify-content: center;
+    margin-bottom: 40px;
 }
+
+.game-info{
+    display:flex;
+    flex-direction: column;
+    height:250px;
+}
+
+.RPS{
+    font-size: 24px;
+    color: white;
+    margin:auto;
+    flex:1;
+    margin-bottom: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+
+}
+
 
 button{
     border-radius: 7.5px;
@@ -50,6 +69,7 @@ button:hover{
     grid-auto-flow: column;
     justify-content: center;
 }
+
 
 
 .game-buttons{

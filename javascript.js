@@ -92,14 +92,7 @@ function game(selection) {
             message =  `The computer also chose ${output[1]}. Tie!`;
             break;
 
-        case "end":
-            message = ' ';
-            playerScore = 0;
-            computerScore = 0;
-            gameNumber = 0;
 
-        case "next":
-            message = ' ';
     }
 
 
@@ -111,8 +104,6 @@ function game(selection) {
     lowerResults2.textContent = message2;
 
 }
-
-
 
 function getSelectionFromKey(e) {
     let div = document.querySelector(`.game-button[data-key="${e.key}"]`);
@@ -135,11 +126,27 @@ let playerScore = 0;
 let computerScore = 0;
 let gameNumber = 0;
 
+
+
+
+
+
 const buttons = document.querySelectorAll('.game-button');
+
 
 
 window.addEventListener('keydown', getSelectionFromKey);
 buttons.forEach(btn => btn.addEventListener('click', getSelectionFromClick));
 
-lowerResults = document.querySelector('#message');
-lowerResults2 = document.querySelector('#scores');
+const lowerResults = document.querySelector('#message');
+const lowerResults2 = document.querySelector('#scores');
+
+const RPS = document.querySelector('.RPS');
+
+const option = ['Rock', 'Paper', 'Scissors'];
+
+
+let i=0;
+
+
+
