@@ -105,21 +105,26 @@ function game(selection) {
 
 }
 
-function getSelectionFromKey(e) {
-    let div = document.querySelector(`.game-button[data-key="${e.key}"]`);
-    if (!div) return;
-    let selection = div.id;
-    output = game(selection);
-}
 
-function getSelectionFromClick(e){
+function getSelectionFromInput(e) {
     let selection;
-    if (e.target.classList.contains('keypress')) selection = e.target.parentNode;
-    else selection = e.target;
+    if(e.target !== ''){ //if input is a click
+        if (e.target.classList.contains('keypress')) selection = e.target.parentNode.id;
+        else selection = e.target.id;
+    }
 
-
-    output = game(selection.id);
+    if (e.type=='keydown'){ //if input is a keydown
+        let div = document.querySelector(`.game-button[data-key="${e.key}"]`);
+        if (!div) return; 
+        selection = div.id;
+    }
+    
+    console.log(selection);
+    return selection;
 }
+
+
+
 
 
 let playerScore = 0;
@@ -135,8 +140,8 @@ const buttons = document.querySelectorAll('.game-button');
 
 
 
-window.addEventListener('keydown', getSelectionFromKey);
-buttons.forEach(btn => btn.addEventListener('click', getSelectionFromClick));
+window.addEventListener('keydown', getSelectionFromInput);
+buttons.forEach(btn => btn.addEventListener('click', getSelectionFromInput));
 
 const lowerResults = document.querySelector('#message');
 const lowerResults2 = document.querySelector('#scores');
