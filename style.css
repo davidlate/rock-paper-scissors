@@ -108,8 +108,25 @@ button{
     justify-content: center;
 }
 
+.messages{
+    padding: 0px;
+    height: 25px;
+    margin-top: 5px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#message{
+    margin-top: 20px;
+}
+
+#result{
+    font-style: italic;
+}
+
 .footer{
-    padding-top: 100px;
+    padding-top: 50px;
     flex:1;
     margin: auto;
 }

@@ -144,10 +144,13 @@ function resetGame(){
 
  function setDefaultMessages() {
     const msgBox = document.querySelector('#message');
-    const scoreBox = document.querySelector('#scores')
+    const msgBox2 = document.querySelector('#result');
+    const scoreBox = document.querySelector('#scores');
     scoreBox.textContent = `Game Number: ${gameNumber}. Your Score: ${playerScore}. Computer Score: ${computerScore}.`;
     if (gameNumber==0) msgBox.textContent = 'Play against the computer.  First to 5 wins!';
     if (gameNumber>0) msgBox.textContent = 'Choose a new selection';
+
+    msgBox2.textContent = '';
 
 }
 
@@ -194,12 +197,43 @@ function updateScore(roundResult) {
 
 
 
+function checkWin(selection){
+
+
+    if (gameState !== 'playerWin' && gameState !== 'computerWin') return;
+    
+    
+    else {
+        const msgBox = document.querySelector('#message');
+        const msgBox2 = document.querySelector('#result');
+
+        difference = Math.abs(playerScore - computerScore);
+        let plural = '';
+        if (difference !== 1) plural = 's';
+        
+        document.querySelector('#next').classList.remove('hover');
+        
+        if (gameState == 'playerWin') {
+            msgBox.textContent = `Congratulations! The computer chose ${selection}.`
+            msgBox2.textContent = `You beat the computer by ${playerScore - computerScore} point${plural}!`;
+        }
+        else if (gameState == 'computerWin'){
+
+        msgBox.textContent = `Sorry! The computer chose ${selection}.`
+        msgBox2.textContent = `The computer beat you by ${computerScore - playerScore} point${plural}. Reset to try again!`;
+
+        }
+    }
+}
+
+
 
 function updateGame(selection){
     
 
 
-document.querySelector('#reset').classList.add('hover');
+
+    document.querySelector('#reset').classList.add('hover');
 
 
     if (selection == "reset") resetGame();
@@ -228,8 +262,6 @@ document.querySelector('#reset').classList.add('hover');
             updateScore(roundResult);
             let scores = [playerScore, computerScore, gameNumber]
 
-            if (playerScore==MAX_SCORE) gameState = 'playerWin';
-            if (computerScore==MAX_SCORE) gameState = 'computerWin';scores;
             roundResultMessage(roundResult, scores);
 
             for (item of ['rock', 'paper', 'scissors']){
@@ -238,15 +270,18 @@ document.querySelector('#reset').classList.add('hover');
             document.querySelector('#next').classList.add('hover');
 
 
-            gameState = "pause";
+            if (playerScore == MAX_SCORE) gameState = 'playerWin';
+            else if (computerScore == MAX_SCORE) gameState = 'computerWin';
+            else gameState = 'pause';
+
+            checkWin(selection);
+
+
         }
         
-
     }
 
-
     return;
-
 }
 
 
@@ -258,7 +293,7 @@ let playerScore = 0;
 let computerScore = 0;
 let gameNumber = 0;
 let gameState = 'play';
-let MAX_SCORE = 3;
+let MAX_SCORE = 2;
 
 
 
