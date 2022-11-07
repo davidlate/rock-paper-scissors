@@ -122,10 +122,9 @@ function getSelectionFromInput(e) {
 }
 
 
-function changeSelectedStyle(targetElementIds, direction, style='selected'){
+function changeSelectedStyle(elementId, direction, style='selected'){
     
-    for (elementId of targetElementIds)
-    element = document.querySelector(`#${ElementId}`);
+    let element = document.querySelector(`#${elementId}`);
 
     if (direction=='add') element.classList.add('selected');
     if (direction=='remove') element.classList.remove('selected')
@@ -198,35 +197,55 @@ function updateScore(roundResult) {
 
 function updateGame(selection){
     
+
+
+document.querySelector('#reset').classList.add('hover');
+
+
     if (selection == "reset") resetGame();
     
-
 
     else if(gameState=="pause"){
         if (selection !== "next") return;
         else if (selection == "next"){
             document.querySelectorAll('button').forEach(btn=> btn.classList.remove('selected'))
+            document.querySelector('#next').classList.remove('hover');
+            for (item of ['rock', 'paper', 'scissors']){
+                document.querySelector(`#${item}`).classList.add('hover')
+            }
+            
             setDefaultMessages();
             gameState = 'play';
-            return;
             }
         }
 
 
-    else {
+    else if (gameState=='play'){
 
-    changeSelectedStyle(selection, "add"); 
-    roundResult = playRound(selection);
-    updateScore(roundResult);
-    let scores = [playerScore, computerScore, gameNumber]
+        if(selection == 'rock' || selection == 'paper' || selection == 'scissors'){
+            changeSelectedStyle(selection, "add"); 
+            roundResult = playRound(selection);
+            updateScore(roundResult);
+            let scores = [playerScore, computerScore, gameNumber]
 
-    if (playerScore==MAX_SCORE) gameState = 'playerWin';
-    if (computerScore==MAX_SCORE) gameState = 'computerWin';scores;
-    roundResultMessage(roundResult, scores);
+            if (playerScore==MAX_SCORE) gameState = 'playerWin';
+            if (computerScore==MAX_SCORE) gameState = 'computerWin';scores;
+            roundResultMessage(roundResult, scores);
 
-    gameState = "pause";
+            for (item of ['rock', 'paper', 'scissors']){
+                document.querySelector(`#${item}`).classList.remove('hover')
+            }
+            document.querySelector('#next').classList.add('hover');
+
+
+            gameState = "pause";
+        }
+        
 
     }
+
+
+    return;
 
 }
 
@@ -239,7 +258,7 @@ let playerScore = 0;
 let computerScore = 0;
 let gameNumber = 0;
 let gameState = 'play';
-let MAX_SCORE = 5;
+let MAX_SCORE = 3;
 
 
 
@@ -257,6 +276,9 @@ const lowerResults = document.querySelector('#message');
 const lowerResults2 = document.querySelector('#scores');
 
 const RPS = document.querySelector('.RPS');
+
+document.querySelector('#next').classList.remove('hover');  //remove option for next button hover at start of game
+document.querySelector('#reset').classList.remove('hover');
 
 
 
