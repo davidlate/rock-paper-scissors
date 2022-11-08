@@ -219,6 +219,7 @@ function checkWin(computerSelection){
         const msgBox2 = document.querySelector('#result');
 
         difference = Math.abs(playerScore - computerScore);
+
         let plural = '';
         if (difference !== 1) plural = 's';
         
@@ -226,12 +227,12 @@ function checkWin(computerSelection){
 
         if (gameState == 'computerWin' && computerSelection == 'none'){
         msgBox.textContent = `Sorry! You forfeit this round to the computer.`
-        msgBox2.textContent = `The computer beat you by ${playerScore - computerScore} point${plural}`;
+        msgBox2.textContent = `The computer beat you by ${difference} point${plural}`;
     }
         
         else if (gameState == 'playerWin') {
             msgBox.textContent = `Congratulations! The computer chose ${computerSelection}.`
-            msgBox2.textContent = `You beat the computer by ${playerScore - computerScore} point${plural}!`;
+            msgBox2.textContent = `You beat the computer by ${difference} point${plural}!`;
         }
         else if (gameState == 'computerWin'){
 
@@ -289,6 +290,40 @@ function handleLate(){
 }
 
 
+function animateRPS(){
+    const rpsOptions = ['Rock...', 'Paper...', 'Scissors...', 'Shoot!']
+    let rpsCounter = 0;
+    let lateCounter = 0;
+    exit = 0;
+    const msgBox = document.querySelector('#message')
+    let end = false;
+    gameState = 'early'
+
+    function updateRPS(){
+        RPS.textContent = rpsOptions[rpsCounter];
+
+        if (rpsCounter == rpsOptions.length-1 || end == true){
+            RPS.textContent = rpsOptions[rpsOptions.length-1];
+            end = true;
+            gameState = 'play';
+            lateCounter ++;
+        }
+
+        rpsCounter++;
+
+        if (lateCounter >= MAX_WAIT){
+            gameState = 'late';
+            RPS.textContent = 'You waited too long!';
+            msgBox.textContent = 'Computer wins this round.';
+            gameState = 'late';
+            updateGame('late');
+        } 
+    }
+
+    updateRPS();
+    rpsInterval = setInterval(updateRPS, 500);
+
+}
 
 
 function updateGame(selection){
@@ -357,10 +392,10 @@ function updateGame(selection){
         if (playerScore == MAX_SCORE) gameState = 'playerWin';
         else if (computerScore == MAX_SCORE) gameState = 'computerWin';
         else gameState = 'pause';
+        checkWin(roundResult[1]);
 
         }
 
-        checkWin(roundResult[1]);
     }}
     
     
@@ -368,7 +403,7 @@ let playerScore = 0;
 let computerScore = 0;
 let gameNumber = 0;
 let gameState = 'start';
-let MAX_SCORE = 3;
+let MAX_SCORE = 2;
 let MAX_WAIT = 2;
 let rpsInterval;
 
@@ -390,40 +425,6 @@ document.querySelector('#message').textContent = `Play against the computer. Fir
 
 
 
-function animateRPS(){
-    const rpsOptions = ['Rock...', 'Paper...', 'Scissors...', 'Shoot!']
-    let rpsCounter = 0;
-    let lateCounter = 0;
-    exit = 0;
-    const msgBox = document.querySelector('#message')
-    let end = false;
-    gameState = 'early'
-
-    function updateRPS(){
-        RPS.textContent = rpsOptions[rpsCounter];
-
-        if (rpsCounter == rpsOptions.length-1 || end == true){
-            RPS.textContent = rpsOptions[rpsOptions.length-1];
-            end = true;
-            gameState = 'play';
-            lateCounter ++;
-        }
-
-        rpsCounter++;
-
-        if (lateCounter >= MAX_WAIT){
-            gameState = 'late';
-            RPS.textContent = 'You waited too long!';
-            msgBox.textContent = 'Computer wins this round.';
-            gameState = 'late';
-            updateGame('late');
-        } 
-    }
-
-    updateRPS();
-    rpsInterval = setInterval(updateRPS, 700);
-
-}
 
 
 
