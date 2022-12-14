@@ -1,39 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors Game</title>
-    <link rel="stylesheet" href="style.css">
-
-</head>
-<body>
-<section>
-
-    <div class="game-info">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section>
+      <div class="game-info">
         <h5>Rock Paper Scissors!</h5>
-        <div class = "RPS">Click Start Game to Start!</div>
-    </div>
+        <div class="RPS">Click Start Game to Start!</div>
+      </div>
 
+      <div class="game-buttons">
+        <button data-key="a" class="game-button" id="rock">
+          Rock
+          <div class="keypress">A</div>
+        </button>
+        <button data-key="s" class="game-button" id="paper">
+          Paper
+          <div class="keypress">S</div>
+        </button>
+        <button data-key="d" class="game-button" id="scissors">
+          Scissors
+          <div id="paper" class="keypress">D</div>
+        </button>
+      </div>
 
-    <div class='game-buttons'>
-        <button data-key="a" class="game-button" id="rock">Rock<div class="keypress">A</div></button>
-        <button data-key="s" class="game-button" id="paper">Paper<div class="keypress">S</div></button>
-        <button data-key="d" class="game-button" id="scissors">Scissors<div id="paper" class="keypress">D</div></button>
-    </div>
+      <div class="mechanics">
+        <button data-key="Shift" class="game-button" id="reset">
+          Reset Game
+          <div class="keypress">Shift</div>
+        </button>
+        <button data-key="ArrowRight" class="game-button hover" id="next">
+          <span id="start-next">Start Game </span>
+          <div class="keypress">Right Arrow</div>
+        </button>
+      </div>
 
-    <div class = "mechanics">
-        <button data-key="Shift" class="game-button" id="reset">Reset Game <div class="keypress">Shift</div></button>
-        <button data-key="ArrowRight" class="game-button hover" id="next"><span id="start-next">Start Game </span><div class="keypress">Right Arrow</div></button>
-    </div>
+      <div id="message" class="messages">
+        Play against the computer. First to 2 wins!
+      </div>
+      <div id="result" class="messages"></div>
+      <div id="scores" class="messages">
+        Game Number: 0. Your Score: 0. Computer Score: 0.
+      </div>
 
-    <div id = "message" class = "messages">Play against the computer. First to 2 wins!</div>
-    <div id = "result" class = "messages"></div>
-    <div id = "scores" class = "messages">Game Number: 0. Your Score: 0. Computer Score: 0.</div>
-
-    <div class="footer">Copyright © 2022 David Earley</div>
-</section>
-<script src="javascript.js" type="text/javascript"></script>
-</body>
+      <div class="footer">Copyright © 2022 David Earley</div>
+    </section>
+    <script src="javascript.js" type="text/javascript"></script>
+  </body>
 </html>

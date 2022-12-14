@@ -1,142 +1,132 @@
-*{
-    background-color: rgb(2, 23, 41);
-    font-family: sans-serif;
-    border-width: 1px;
-    color: grey;
-    box-sizing: border-box;
+* {
+  background-color: rgb(2, 23, 41);
+  font-family: sans-serif;
+  border-width: 1px;
+  color: grey;
+  box-sizing: border-box;
 }
 
-body{
-    display:flex;
-    justify-content: center;
+body {
+  display: flex;
+  justify-content: center;
 }
 
-section{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
+section {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-span{
-    background-color: transparent;
-    color: white;
+span {
+  background-color: transparent;
+  color: white;
 }
 
-em{
-    color: white;
+em {
+  color: white;
 }
 
-
-h5{
-
-    font-size: 48px;
-    color: white;
-    justify-content: center;
-    margin-bottom: 40px;
+h5 {
+  font-size: 48px;
+  color: white;
+  justify-content: center;
+  margin-bottom: 40px;
 }
 
-.game-info{
-    display:flex;
-    flex-direction: column;
-    height:250px;
+.game-info {
+  display: flex;
+  flex-direction: column;
+  height: 250px;
 }
 
-
-
-.RPS{
-    font-size: 24px;
-    color: white;
-    margin:auto;
-    flex:1;
-    margin-bottom: 40px;
-    font-weight: bold;
-
+.RPS {
+  font-size: 24px;
+  color: white;
+  margin: auto;
+  flex: 1;
+  margin-bottom: 40px;
+  font-weight: bold;
 }
 
-
-button{
-    border-radius: 7.5px;
-    background-color: rgb(2, 19, 97);
+button {
+  border-radius: 7.5px;
+  background-color: rgb(2, 19, 97);
 }
 
-.hover:hover{
-    border-color: yellow;
-    scale:1.05;
+.hover:hover {
+  border-color: yellow;
+  scale: 1.05;
 }
 
-.selected{
-    transition: 0.07s;
-    scale: 1.2;
-    border-color: cyan;
+.selected {
+  transition: 0.07s;
+  scale: 1.2;
+  border-color: cyan;
 }
-
 
 .mechanics {
-    margin-top: 30px;
-    display: grid;
-    grid-auto-flow: column;
-    justify-content: center;
+  margin-top: 30px;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
 }
 
-
-
-.game-buttons{
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 1fr;
+.game-buttons {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
 }
 
-.selected{
-    transition: 0.07s;
-    border-color: yellow;
-    scale: 1.1;
+.selected {
+  transition: 0.07s;
+  border-color: yellow;
+  scale: 1.1;
 }
 
-.game-button{
-    font-weight: bold;
-    font-size: 24px;
-    color: white;
-    margin: 0 30px 0 30px;
-    padding: 5px;
+.game-button {
+  font-weight: bold;
+  font-size: 24px;
+  color: white;
+  margin: 0 30px 0 30px;
+  padding: 5px;
 }
 
-.keypress{
-    font-style: italic;
-    font-size: 80%;
-    background-color: transparent;
+.keypress {
+  font-style: italic;
+  font-size: 80%;
+  background-color: transparent;
 }
 
-.messages{
+.messages {
+  padding-top: 30px;
+  color: white;
+  font-weight: bold;
+  font-size: 110%;
 
-    padding-top:30px;
-    color: white;
-    font-weight: bold;
-    font-size:110%;
-    
-    margin:auto;
-    justify-content: center;
+  margin: auto;
+  justify-content: center;
 }
 
-.messages{
-    padding: 0px;
-    height: 25px;
-    margin-top: 5px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
+.messages {
+  padding: 0px;
+  height: 25px;
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#message{
-    margin-top: 20px;
+#message {
+  margin-top: 20px;
 }
 
-#result{
-    font-style: italic;
+#result {
+  font-style: italic;
 }
 
-.footer{
-    padding-top: 50px;
-    flex:1;
-    margin: auto;
+.footer {
+  padding-top: 50px;
+  flex: 1;
+  margin: auto;
 }
